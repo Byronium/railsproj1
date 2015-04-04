@@ -1,3 +1,24 @@
-<h3>Trainer</h3>
+<h2>Trainer</h2>
 <p>Name: <%= @trainer.name if @trainer.name %></p>
 <p>Email: <%= @trainer.email if @trainer.email %></p>
+
+<h2>Baes</h2>
+
+<% @trainer.pokemons.each_with_index do |p, index| %>
+	<% if index == 0 %>
+		<h3> Main Bae </h3>
+	<% else %>
+		<h3> Side Bae #<%= index %> </h3>
+	<% end %>  
+	
+	<p>Name: <%= p.name %> </p>
+	<p>Level: <%= p.level %> </p>
+	<p>Health: <%= p.health %> </p>
+
+	<%= button_to "Smack dat", smack_path(id: p), :class => "button medium", :method => :patch %>
+
+<% end %>
+
+<% if @trainer == current_trainer %>
+	<%= button_to "Make new bae", new_pokemon_path, :class => "button medium", :method => :get %>
+<% end %>
